@@ -161,23 +161,124 @@
       transition: transform 0.1s;
     }
 
-    /* ── PIX BOX ── */
-    .pix-box { display: none; background: #fff; border-radius: 20px; padding: 36px; text-align: center; box-shadow: 0 6px 24px rgba(0,0,0,0.08); margin-top: 48px; }
-    .pix-box h2 { font-family: 'Baloo 2', cursive; font-size: 1.8rem; color: var(--laranja); margin-bottom: 10px; }
-    .pix-box p { color: #666; font-size: .9rem; margin-bottom: 4px; }
-    .qrcode { width: 100%; max-width: 220px; aspect-ratio: 1/1; object-fit: contain; display: block; margin: 20px auto; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
-    .pix-name { background: var(--laranja); padding: 12px 20px; border-radius: 12px; margin-top: 12px; font-weight: 700; font-size: 1rem; color: #fff; }
-    .pix-key-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--bege); padding: 13px 22px; border-radius: 12px;
-      margin-top: 12px; font-weight: 700; font-size: 1rem; color: var(--marrom);
-      cursor: pointer; border: 2px dashed var(--laranja2);
-      transition: background .2s, transform .1s;
-      width: 100%; justify-content: center;
+    /* ── DESIGN PREMIUM DA ÁREA DO PIX ── */
+    .pix-container {
+      margin: 30px auto;
+      max-width: 450px;
+      padding: 0 15px;
+      animation: surgimentoSuave 0.4s ease-out forwards;
     }
-    .pix-key-btn:hover { background: #ffe8cc; }
-    .pix-key-btn:active { transform: scale(0.98); }
-    .pix-hint { font-size: .78rem; color: #aaa; margin-top: 8px; }
+
+    @keyframes surgimentoSuave {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .pix-card {
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid #eef2f5;
+      overflow: hidden;
+      color: #333;
+    }
+
+    /* Cabeçalho inspirado no tom oficial do Pix */
+    .pix-header {
+      background: linear-gradient(135deg, #32bcad 0%, #1d9b8e 100%);
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      text-align: left;
+    }
+    .pix-logo-emblema {
+      font-size: 1.8rem;
+      background: rgba(255, 255, 255, 0.2);
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+    }
+    .pix-header h4 { margin: 0; font-size: 1.2rem; font-weight: 700; font-family: 'Baloo 2', cursive; }
+    .pix-header p { margin: 2px 0 0 0; font-size: 0.85rem; opacity: 0.9; }
+
+    .pix-corpo { padding: 25px 20px; text-align: center; }
+    
+    .pix-opcao { margin-bottom: 15px; }
+    .pix-passo {
+      display: inline-block;
+      background: #e6f7f5;
+      color: #1d9b8e;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 30px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .pix-instrucao { font-size: 0.9rem; color: #555; margin: 0 0 15px 0; line-height: 1.4; }
+
+    /* Moldura estilo Totem para destacar o QR Code */
+    .qrcode-moldura {
+      background: #fff;
+      border: 2px solid #32bcad;
+      padding: 12px;
+      border-radius: 16px;
+      display: inline-block;
+      box-shadow: 0 4px 12px rgba(50, 188, 173, 0.15);
+      transition: transform 0.3s;
+    }
+    .qrcode-moldura:hover { transform: scale(1.02); }
+    .qrcode-moldura img { width: 180px; height: 180px; display: block; }
+
+    /* Linha divisória charmosa */
+    .pix-divider {
+      position: relative;
+      text-align: center;
+      margin: 25px 0;
+    }
+    .pix-divider::before {
+      content: ""; position: absolute; left: 0; top: 50%; width: 100%; height: 1px; background: #e0e0e0; z-index: 1;
+    }
+    .pix-divider span {
+      position: relative; z-index: 2; background: #fff; padding: 0 15px; color: #888; font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+    }
+
+    /* Botão de Cópia estilo App de Banco */
+    .btn-pix-copia-e-cola {
+      background: #32bcad;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(50, 188, 173, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s;
+    }
+    .btn-pix-copia-e-cola:hover { background: #289e91; transform: translateY(-2px); }
+    .btn-pix-copia-e-cola:active { transform: scale(0.98); }
+
+    /* Caixa de alerta final */
+    .pix-alerta {
+      background: #fff9e6;
+      border-top: 1px solid #ffeeba;
+      color: #856404;
+      padding: 15px 20px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      text-align: left;
+    }
 
     /* ── TOAST ── */
     .toast { display: none; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--verde); color: #fff; padding: 14px 30px; border-radius: 50px; font-weight: 700; font-size: 1rem; box-shadow: 0 6px 20px rgba(0,0,0,0.25); z-index: 10001; white-space: nowrap; }
@@ -343,16 +444,50 @@
       <div class="item-card"><h3>Derrubar Água nos Chefes</h3><div class="preco-item">R$ 2,00</div><button class="btn-add" onclick="addToCart('Derrubar Água nos Chefes',2,this)">+ Adicionar ao Carrinho</button></div>
     </div>
 
-    <div class="pix-box" id="pixBox">
-      <h2>💳 Pagamento via Pix</h2>
-      <p>Escaneie o QR Code ou copie a chave abaixo:</p>
-      <img src="qrcode.jpeg" class="qrcode" alt="QR Code Pix">
-      <div class="pix-name">RODRIGO VENTURA FERREIRA</div>
-      <div class="pix-key-btn" onclick="copyPix()">
-        📋 Copiar Chave Pix
+    <!-- NOVA ÁREA DO PIX ESTILIZADA -->
+<div id="pixBox" class="pix-container" style="display: none;">
+  <div class="pix-card">
+    
+    <div class="pix-header">
+      <div class="pix-logo-emblema">⚡</div>
+      <div>
+        <h4>Pagamento via Pix</h4>
+        <p>Rápido, seguro e aprovado na hora</p>
       </div>
-      <p class="pix-hint">Toque para copiar · Envie o comprovante no WhatsApp</p>
     </div>
+
+    <div class="pix-corpo">
+      <!-- Opção 1: QR Code -->
+      <div class="pix-opcao">
+        <span class="pix-passo">Opção 1</span>
+        <p class="pix-instrucao">Abra o app do seu banco e <strong>escaneie o QR Code</strong>:</p>
+        <div class="qrcode-moldura">
+          <img id="qrCodeImg" src="" alt="QR Code Pix">
+        </div>
+      </div>
+
+      <!-- Divisor visual moderno -->
+      <div class="pix-divisor">
+        <span>ou se preferir</span>
+      </div>
+
+      <!-- Opção 2: Copia e Cola -->
+      <div class="pix-opcao">
+        <span class="pix-passo">Opção 2</span>
+        <p class="pix-instrucao">Copie o código abaixo e cole no seu banco (<strong>Pix Copia e Cola</strong>):</p>
+        <button class="btn-pix-copia-e-cola" onclick="copyPix()">
+          <span>📋</span> Copiar Código Pix
+        </button>
+      </div>
+    </div>
+
+    <!-- Alerta importante de pós-pagamento -->
+    <div class="pix-alerta">
+      💡 <strong>Importante:</strong> Assim que concluir o pagamento no seu banco, volte aqui e nos envie o comprovante na conversa do WhatsApp que foi aberta!
+    </div>
+
+  </div>
+</div>
 
   </div>
 </div>
@@ -447,7 +582,49 @@
     updateCart();
   }
 
-function updateCart(){
+  // Variável global para armazenar o código Pix gerado no momento
+  let codigoPixAtual = '';
+
+  // Calcula a assinatura digital de segurança (CRC16) exigida pelos bancos
+  function calcularCRC16(str) {
+    let crc = 0xFFFF;
+    for (let i = 0; i < str.length; i++) {
+      let b = str.charCodeAt(i);
+      crc ^= (b << 8);
+      for (let j = 0; j < 8; j++) {
+        if ((crc & 0x8000) !== 0) {
+          crc = ((crc << 1) ^ 0x1021) & 0xFFFF;
+        } else {
+          crc = (crc << 1) & 0xFFFF;
+        }
+      }
+    }
+    return crc.toString(16).toUpperCase().padStart(4, '0');
+  }
+
+  function gerarPixCopiaECola(valorTotal) {
+    function formatarEMV(tag, valor) {
+      const tam = valor.length.toString().padStart(2, '0');
+      return tag + tam + valor;
+    }
+
+    // Dados extraídos da sua chave oficial
+    const infoChave = formatarEMV('00', 'BR.GOV.BCB.PIX') + formatarEMV('01', 'c8299437-d1f8-4b2e-b156-f473f83a6a02');
+    const merchantInfo = formatarEMV('26', infoChave);
+    const mcc = formatarEMV('52', '0000');
+    const moeda = formatarEMV('53', '986');
+    const valorStr = formatarEMV('54', valorTotal.toFixed(2)); // Adiciona o valor exato do carrinho
+    const pais = formatarEMV('58', 'BR');
+    const nomeRecebedor = formatarEMV('59', 'RODRIGO VENTURA FERREIRA');
+    const cidade = formatarEMV('60', 'DIADEMA');
+    const txid = formatarEMV('62', formatarEMV('05', '1kCTrWwbuM1dSm1AaVWIpK'));
+
+    const payload = "000201" + merchantInfo + mcc + moeda + valorStr + pais + nomeRecebedor + cidade + txid + "6304";
+    
+    return payload + calcularCRC16(payload);
+  }
+  
+  function updateCart(){
     const itemsEl=document.getElementById('cart-items');
     const totalEl=document.getElementById('cart-total');
     const carrinhoEl=document.getElementById('carrinho');
@@ -517,68 +694,62 @@ function updateCart(){
       return; 
     }
     
-    let total=0,lista='';
+    let total=0, lista='';
     Object.keys(cart).forEach(item=>{
-      const p=cart[item],sub=p.quantity*p.price;
+      const p=cart[item], sub=p.quantity*p.price;
       total+=sub;
       lista+=`${p.quantity}x ${item} — R$ ${sub.toFixed(2)}\n`;
     });
     
+    // Gera o Pix com o valor total da compra do cliente
+    codigoPixAtual = gerarPixCopiaECola(total);
+    
+    // Atualiza o QR Code na tela usando os novos dados estruturados
+    const qrCodeImg = document.getElementById('qrCodeImg');
+    if(qrCodeImg) {
+      qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(codigoPixAtual)}`;
+    }
+
     const pixBox=document.getElementById('pixBox');
     pixBox.style.display='block';
     pixBox.scrollIntoView({behavior:'smooth'});
     
-    const msg=`🎉 NOVO PEDIDO — FESTA JUNINA 🎉\n\n👤 Nome: ${nome}\n📞 Telefone: ${tel}\n\n🛒 Pedido:\n${lista}\n💰 Total: R$ ${total.toFixed(2)}\n\n🔑 Copie a chave pix no site e envie o comprovante de pagamento aqui!`;
+    // Mensagem formatada para o WhatsApp
+    const msg=`🎉 NOVO PEDIDO — FESTA JUNINA 🎉\n\n👤 Nome: ${nome}\n📞 Telefone: ${tel}\n\n🛒 Pedido:\n${lista}\n💰 Total: R$ ${total.toFixed(2)}\n\nO pagamento foi gerado via Pix Copia e Cola no valor exato de R$ ${total.toFixed(2)}. Envie o comprovante aqui!`;
     
     closeModal();
     dispararConfetes();
-    mostrarToast('🎉 Pedido enviado! Até a festa!', false);
-    setTimeout(()=>{ window.open(`https://wa.me/5511942285574?text=${encodeURIComponent(msg)}`,'_blank'); }, 800);
+    mostrarToast('🎉 Código Pix gerado! Copie abaixo.', false);
+    setTimeout(()=>{ window.open(`https://wa.me/5511942285574?text=${encodeURIComponent(msg)}`,'_blank'); }, 1200);
   }
 
-  function copyPix(){
-    const chave='00020126580014BR.GOV.BCB.PIX0136c8299437-d1f8-4b2e-b156-f473f83a6a025204000053039865802BR5924RODRIGO VENTURA FERREIRA6007DIADEMA622605221kCTrWwbuM1dSm1AaVWIpK6304EB1D';
-    // Função de contingência para celulares e ambientes HTTP (sem segurança)
+function copyPix(){
+    if (!codigoPixAtual) {
+      mostrarToast('⚠️ Nenhum pedido finalizado ainda!', true);
+      return;
+    }
+
     function metodoAntigoFallback() {
       const textarea = document.createElement('textarea');
-      textarea.value = chave;
-      
-      // Esconde o elemento da tela para o usuário não ver
-      textarea.style.position = 'fixed';
-      textarea.style.top = '0';
-      textarea.style.left = '0';
-      textarea.style.opacity = '0';
+      textarea.value = codigoPixAtual;
+      textarea.style.position = 'fixed'; textarea.style.opacity = '0';
       document.body.appendChild(textarea);
-      
-      textarea.focus();
-      textarea.select();
-      textarea.setSelectionRange(0, 99999); // Garante a seleção em dispositivos iOS (iPhone)
-      
+      textarea.focus(); textarea.select();
+      textarea.setSelectionRange(0, 99999);
       try {
-        const copiou = document.execCommand('copy');
-        if (copiou) {
-          mostrarToast('✅ Chave Pix copiada!', false);
-        } else {
-          mostrarToast('⚠️ Não foi possível copiar automaticamente.', true);
-        }
+        if (document.execCommand('copy')) mostrarToast('✅ Código Pix copiado com valor!', false);
       } catch (err) {
-        mostrarToast('⚠️ Erro ao copiar chave!', true);
+        mostrarToast('⚠️ Erro ao copiar código!', true);
       }
-      
       document.body.removeChild(textarea);
     }
 
-    // Tenta usar o método moderno primeiro (funciona em produção com HTTPS)
     if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(chave)
-        .then(() => {
-          mostrarToast('✅ Chave Pix copiada!', false);
-        })
-        .catch(() => {
-          metodoAntigoFallback(); // Se der erro no método moderno, ativa o plano B
-        });
+      navigator.clipboard.writeText(codigoPixAtual)
+        .then(() => mostrarToast('✅ Código Pix copiado com valor!', false))
+        .catch(() => metodoAntigoFallback());
     } else {
-      metodoAntigoFallback(); // Se não tiver suporte ou for HTTP local, vai direto pro plano B
+      metodoAntigoFallback();
     }
   }
 
