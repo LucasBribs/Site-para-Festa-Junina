@@ -7,6 +7,7 @@
   <link rel="icon" type="image/png" href="fogueira.png">
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
     :root {
       --laranja:  #ff6a00;
       --laranja2: #ff9800;
@@ -93,21 +94,53 @@
     .btn-add:hover { background: #e65c00; transform: scale(1.02); }
     .btn-add.adicionado { background: var(--verde); }
 
-    /* ── CARRINHO FLUTUANTE ── */
-    .carrinho { position: fixed; right: 20px; bottom: 20px; background: var(--laranja); color: #fff; padding: 14px 18px; border-radius: 20px; box-shadow: 0 10px 32px rgba(0,0,0,0.28); z-index: 800; width: 300px; display: none; }
-    .carrinho.visivel { display: block; }
-    .carrinho h3 { margin-bottom: 8px; font-family: 'Baloo 2', cursive; font-size: 1.05rem; }
-    .carrinho-items { max-height: 200px; overflow-y: auto; font-size: .84rem; }
-    .cart-item-row { display: flex; align-items: center; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.2); gap: 6px; }
-    .cart-item-name { flex: 1; font-size: .82rem; line-height: 1.2; }
-    .cart-item-controls { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
-    .cart-btn-qty { width: 24px; height: 24px; border: none; border-radius: 6px; background: rgba(255,255,255,0.25); color: #fff; font-size: 1rem; font-weight: 700; cursor: pointer; line-height: 1; transition: background .15s; }
-    .cart-btn-qty:hover { background: rgba(255,255,255,0.45); }
-    .cart-item-qty { font-weight: 700; min-width: 20px; text-align: center; font-size: .88rem; }
-    .cart-item-sub { font-size: .78rem; opacity: .85; flex-shrink: 0; }
-    .carrinho-total { margin-top: 8px; font-weight: 700; font-size: .9rem; }
-    .btn-finalizar { margin-top: 10px; background: #fff; color: var(--laranja); border: none; padding: 9px 16px; border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; font-size: .9rem; transition: opacity .2s; }
-    .btn-finalizar:hover { opacity: .88; }
+/* ── NOVO CARRINHO (ESTILO TOTEM / FAST FOOD) ── */
+    .carrinho { 
+      position: fixed; right: 20px; bottom: 20px; 
+      background: #fff; color: var(--marrom); 
+      border-radius: 18px; box-shadow: 0 10px 40px rgba(0,0,0,0.25); 
+      z-index: 1000; width: 340px; display: none; 
+      flex-direction: column; overflow: hidden; border: 2px solid var(--laranja);
+    }
+    .carrinho.visivel { display: flex; animation: slideUpCart .3s ease; }
+    @keyframes slideUpCart { from{transform:translateY(30px);opacity:0;} to{transform:translateY(0);opacity:1;} }
+    
+    .carrinho-header { 
+      background: var(--laranja); color: #fff; padding: 14px 20px; 
+      display: flex; justify-content: space-between; align-items: center; 
+    }
+    .carrinho-header h3 { font-family: 'Baloo 2', cursive; font-size: 1.2rem; margin: 0; }
+    .seta-mobile { display: none; font-size: .8rem; font-weight: 700; background: rgba(0,0,0,0.15); padding: 4px 10px; border-radius: 20px; }
+
+    .carrinho-body { display: flex; flex-direction: column; }
+    
+    .carrinho-items { max-height: 40vh; overflow-y: auto; padding: 10px 20px; background: #fafafa; }
+    .cart-item-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #e0e0e0; gap: 10px; }
+    .cart-item-row:last-child { border-bottom: none; }
+    .cart-item-name { flex: 1; font-size: .95rem; font-weight: 600; line-height: 1.2; }
+    
+    @keyframes pulseCart {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .carrinho.animar { animation: pulseCart 0.3s ease-in-out; }
+
+    /* Botões grandes e clicáveis (estilo Totem) */
+    .cart-item-controls { display: flex; align-items: center; gap: 8px; background: #fff; padding: 4px; border-radius: 50px; border: 1px solid #ddd; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .cart-btn-qty { width: 28px; height: 28px; border-radius: 50%; border: none; background: #f0f0f0; color: var(--marrom); font-size: 1.2rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s, transform .1s; }
+    .cart-btn-qty:hover { background: var(--laranja2); color: #fff; }
+    .cart-btn-qty:active { transform: scale(0.9); }
+    .cart-item-qty { font-weight: 700; width: 20px; text-align: center; font-size: 1rem; }
+    .cart-item-sub { font-size: .9rem; font-weight: 700; color: var(--laranja); flex-shrink: 0; text-align: right; min-width: 60px; }
+    
+    .carrinho-footer { padding: 16px 20px; background: #fff; border-top: 1px solid #ddd; }
+    .carrinho-total { font-size: 1.2rem; font-weight: 700; display: flex; justify-content: space-between; margin-bottom: 12px; }
+    .btn-finalizar { background: var(--verde); color: #fff; border: none; border-radius: 12px; padding: 14px; font-weight: 700; font-size: 1.1rem; cursor: pointer; width: 100%; box-shadow: 0 4px 14px rgba(27,127,46,0.3); transition: transform .2s; }
+    .btn-finalizar:hover { transform: translateY(-2px); background: #156524; }
+    
+    .btn-limpar { background: transparent; color: #888; border: none; padding: 10px; border-radius: 10px; font-size: .85rem; font-weight: 600; cursor: pointer; width: 100%; margin-top: 6px; transition: color .2s; }
+    .btn-limpar:hover { color: var(--vermelho); background: #ffeeee; }
 
     /* ── MODAL ── */
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; }
@@ -121,6 +154,12 @@
     .btn-modal-ok { width: 100%; padding: 14px; border: none; border-radius: 12px; background: var(--laranja); color: #fff; font-weight: 700; font-size: 1rem; cursor: pointer; margin-bottom: 10px; transition: background .2s; }
     .btn-modal-ok:hover { background: #e65c00; }
     .btn-modal-cancel { width: 100%; padding: 12px; border: none; border-radius: 12px; background: #eee; color: #888; font-size: .9rem; cursor: pointer; }
+
+    /* Efeito de clique (afundar) nos botões */
+    .btn-add:active, .btn-combo:active, .btn-finalizar:active {
+      transform: scale(0.95);
+      transition: transform 0.1s;
+    }
 
     /* ── PIX BOX ── */
     .pix-box { display: none; background: #fff; border-radius: 20px; padding: 36px; text-align: center; box-shadow: 0 6px 24px rgba(0,0,0,0.08); margin-top: 48px; }
@@ -164,9 +203,19 @@
     .footer-bottom span { color: var(--amarelo); }
 
     @media(max-width:600px){
-      .carrinho { width: calc(100% - 24px); left: 12px; right: 12px; bottom: 12px; max-height: 46vh; flex-direction: column; }
-      .carrinho.visivel { display: flex; }
-      .carrinho-items { flex: 1; overflow-y: auto; }
+/* No celular, ele gruda no fundo da tela e ocupa a largura total */
+      .carrinho { width: 100%; right: 0; bottom: 0; border-radius: 24px 24px 0 0; border: none; box-shadow: 0 -5px 20px rgba(0,0,0,0.15); }
+      
+      .carrinho-header { padding: 16px 24px; cursor: pointer; }
+      .seta-mobile { display: block; } /* Mostra o botãozinho de Puxar */
+      
+      /* Esconde o corpo do carrinho por padrão para não cobrir a tela toda */
+      .carrinho-body { display: none; } 
+      /* Quando tem a classe 'aberto', mostra tudo e vai até quase o topo da tela */
+      .carrinho.aberto .carrinho-body { display: flex; }
+      .carrinho.aberto .carrinho-items { max-height: 60vh; }
+      .carrinho.aberto .seta-mobile { transform: rotate(180deg); } /* Seta aponta pra baixo */
+      
       .cardapio-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .item-card { padding: 12px 10px; }
       .item-card h3 { font-size: .82rem; }
@@ -194,10 +243,23 @@
 </div>
 
 <div class="carrinho" id="carrinho">
-  <h3>🛒 Carrinho</h3>
-  <div class="carrinho-items" id="cart-items">0 itens</div>
-  <div class="carrinho-total">Total: R$ <span id="cart-total">0,00</span></div>
-  <button class="btn-finalizar" onclick="openModal()">Finalizar Pedido</button>
+  <div class="carrinho-header" onclick="toggleCarrinhoMobile()">
+    <h3>🛒 Seu Pedido</h3>
+    <!-- Indicador de seta para celular (escondido no PC) -->
+    <span class="seta-mobile">Puxar ▲</span> 
+  </div>
+  
+  <div class="carrinho-body" id="carrinho-body">
+    <div class="carrinho-items" id="cart-items">
+      <span style="opacity:.6; font-size:.9rem;">Carrinho vazio</span>
+    </div>
+    
+    <div class="carrinho-footer">
+      <div class="carrinho-total">Total: <span style="color:var(--verde);">R$ <span id="cart-total">0,00</span></span></div>
+      <button class="btn-finalizar" onclick="openModal()">Fechar Pedido</button>
+      <button class="btn-limpar" onclick="limparCarrinho()">🗑️ Esvaziar</button>
+    </div>
+  </div>
 </div>
 
 <div class="bandeirinhas" id="bandeirasTopo"></div>
@@ -362,10 +424,19 @@
   function addToCart(item, price, btn){
     if(!cart[item]) cart[item]={quantity:0,price};
     cart[item].quantity++;
+    
+    // Efeito no botão
     const orig = btn.textContent;
     btn.textContent='✓ Adicionado!';
     btn.classList.add('adicionado');
     setTimeout(()=>{ btn.textContent=orig; btn.classList.remove('adicionado'); }, 1200);
+    
+    // Efeito de pulo no carrinho
+    const carrinhoEl = document.getElementById('carrinho');
+    carrinhoEl.classList.remove('animar');
+    void carrinhoEl.offsetWidth; // Reinicia a animação
+    carrinhoEl.classList.add('animar');
+    
     updateCart();
   }
 
@@ -376,21 +447,24 @@
     updateCart();
   }
 
-  function updateCart(){
+function updateCart(){
     const itemsEl=document.getElementById('cart-items');
     const totalEl=document.getElementById('cart-total');
     const carrinhoEl=document.getElementById('carrinho');
     const keys=Object.keys(cart);
+    
     if(keys.length===0){
-      itemsEl.innerHTML='<span style="opacity:.7;font-size:.82rem">Carrinho vazio</span>';
+      itemsEl.innerHTML='<span style="opacity:.6;font-size:.9rem;display:block;text-align:center;padding:10px 0;">Carrinho vazio</span>';
       totalEl.innerText='0,00';
       carrinhoEl.classList.remove('visivel');
       return;
     }
+    
     carrinhoEl.classList.add('visivel');
     let html='',total=0;
+    
     keys.forEach(item=>{
-      const p=cart[item],sub=p.quantity*p.price;
+      const p=cart[item], sub=p.quantity*p.price;
       total+=sub;
       html+=`<div class="cart-item-row">
         <span class="cart-item-name">${item}</span>
@@ -402,12 +476,30 @@
         <span class="cart-item-sub">R$${sub.toFixed(2)}</span>
       </div>`;
     });
+    
     itemsEl.innerHTML=html;
     totalEl.innerText=total.toFixed(2).replace('.',',');
   }
 
+  // NOVA FUNÇÃO: Abre e fecha a gaveta do carrinho no celular
+  function toggleCarrinhoMobile() {
+    if (window.innerWidth <= 600) {
+      const carrinho = document.getElementById('carrinho');
+      carrinho.classList.toggle('aberto');
+    }
+  }
+  
+  function limparCarrinho() {
+    cart = {}; // Zera os itens
+    updateCart(); // Atualiza a tela
+    mostrarToast('🗑️ Carrinho esvaziado!', false);
+  }
+
   function openModal(){
-    if(Object.keys(cart).length===0){alert('Adicione itens ao carrinho!');return;}
+    if(Object.keys(cart).length===0){
+      mostrarToast('⚠️ Adicione itens ao carrinho primeiro!', true);
+      return;
+    }
     document.getElementById('modalOverlay').classList.add('ativo');
   }
   function closeModal(){ document.getElementById('modalOverlay').classList.remove('ativo'); }
@@ -415,35 +507,79 @@
   function finishOrder(){
     const nome=document.getElementById('cliente-nome').value.trim();
     const tel=document.getElementById('cliente-telefone').value.trim();
-    if(!nome){alert('Digite seu nome');return;}
-    if(!tel){alert('Digite seu telefone');return;}
+    
+    if(!nome){ mostrarToast('⚠️ Digite seu nome, por favor!', true); return; }
+    if(!tel){ mostrarToast('⚠️ Digite seu telefone, por favor!', true); return; }
+    
     const telLimpo=tel.replace(/\D/g,'');
-    if(telLimpo.length<10||telLimpo.length>11){alert('Telefone inválido (inclua DDD)');return;}
+    if(telLimpo.length<10||telLimpo.length>11){ 
+      mostrarToast('⚠️ Telefone inválido (inclua o DDD)', true); 
+      return; 
+    }
+    
     let total=0,lista='';
     Object.keys(cart).forEach(item=>{
       const p=cart[item],sub=p.quantity*p.price;
       total+=sub;
       lista+=`${p.quantity}x ${item} — R$ ${sub.toFixed(2)}\n`;
     });
+    
     const pixBox=document.getElementById('pixBox');
     pixBox.style.display='block';
     pixBox.scrollIntoView({behavior:'smooth'});
-    const msg=`🎉 NOVO PEDIDO — FESTA JUNINA 🎉\n\n👤 Nome: ${nome}\n📞 Telefone: ${tel}\n\n🛒 Pedido:\n${lista}\n💰 Total: R$ ${total.toFixed(2)}\n\n🔑 Chave Pix: 11982644336\nEnvie o comprovante aqui!`;
+    
+    const msg=`🎉 NOVO PEDIDO — FESTA JUNINA 🎉\n\n👤 Nome: ${nome}\n📞 Telefone: ${tel}\n\n🛒 Pedido:\n${lista}\n💰 Total: R$ ${total.toFixed(2)}\n\n🔑 Copie a chave pix no site e envie o comprovante de pagamento aqui!`;
+    
     closeModal();
     dispararConfetes();
-    mostrarToast();
-    setTimeout(()=>{ window.open(`https://wa.me/5511942285574?text=${encodeURIComponent(msg)}`,'_blank'); },300);
+    mostrarToast('🎉 Pedido enviado! Até a festa!', false);
+    setTimeout(()=>{ window.open(`https://wa.me/5511942285574?text=${encodeURIComponent(msg)}`,'_blank'); }, 800);
   }
 
   function copyPix(){
-    const chave='11982644336';
-    navigator.clipboard.writeText(chave).then(()=>{
-      const t=document.getElementById('toast');
-      const orig=t.textContent;
-      t.textContent='✅ Chave Pix copiada!';
-      mostrarToast();
-      setTimeout(()=>{ t.textContent=orig; },4500);
-    }).catch(err=>alert('Erro ao copiar: '+err));
+    const chave='00020126580014BR.GOV.BCB.PIX0136c8299437-d1f8-4b2e-b156-f473f83a6a025204000053039865802BR5924RODRIGO VENTURA FERREIRA6007DIADEMA622605221kCTrWwbuM1dSm1AaVWIpK6304EB1D';
+    // Função de contingência para celulares e ambientes HTTP (sem segurança)
+    function metodoAntigoFallback() {
+      const textarea = document.createElement('textarea');
+      textarea.value = chave;
+      
+      // Esconde o elemento da tela para o usuário não ver
+      textarea.style.position = 'fixed';
+      textarea.style.top = '0';
+      textarea.style.left = '0';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      
+      textarea.focus();
+      textarea.select();
+      textarea.setSelectionRange(0, 99999); // Garante a seleção em dispositivos iOS (iPhone)
+      
+      try {
+        const copiou = document.execCommand('copy');
+        if (copiou) {
+          mostrarToast('✅ Chave Pix copiada!', false);
+        } else {
+          mostrarToast('⚠️ Não foi possível copiar automaticamente.', true);
+        }
+      } catch (err) {
+        mostrarToast('⚠️ Erro ao copiar chave!', true);
+      }
+      
+      document.body.removeChild(textarea);
+    }
+
+    // Tenta usar o método moderno primeiro (funciona em produção com HTTPS)
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(chave)
+        .then(() => {
+          mostrarToast('✅ Chave Pix copiada!', false);
+        })
+        .catch(() => {
+          metodoAntigoFallback(); // Se der erro no método moderno, ativa o plano B
+        });
+    } else {
+      metodoAntigoFallback(); // Se não tiver suporte ou for HTTP local, vai direto pro plano B
+    }
   }
 
   function dispararConfetes(){
@@ -466,12 +602,28 @@
     setTimeout(()=>{w.classList.remove('ativo');w.innerHTML='';},7000);
   }
 
-  function mostrarToast(){
-    const t=document.getElementById('toast');
-    t.classList.remove('ativo');void t.offsetWidth;
+  function mostrarToast(mensagem, isErro = false) {
+    const t = document.getElementById('toast');
+    t.textContent = mensagem; // Define o texto
+    t.style.background = isErro ? 'var(--vermelho)' : 'var(--verde)'; // Muda a cor
+    
+    t.classList.remove('ativo');
+    void t.offsetWidth; // Força a animação a reiniciar
     t.classList.add('ativo');
-    setTimeout(()=>t.classList.remove('ativo'),4500);
   }
+
+  // Máscara para o campo de telefone
+  const telInput = document.getElementById('cliente-telefone');
+  telInput.addEventListener('input', function (e) {
+    let valor = e.target.value.replace(/\D/g, ''); // Tira tudo que não é número
+    let formatado = '';
+    
+    if (valor.length > 0) formatado = '(' + valor.substring(0,2);
+    if (valor.length > 2) formatado += ') ' + valor.substring(2,7);
+    if (valor.length > 7) formatado += '-' + valor.substring(7,11);
+    
+    e.target.value = formatado;
+  });
 </script>
 </body>
 </html>
