@@ -9,16 +9,23 @@
   <style>
     html { scroll-behavior: smooth; scroll-padding-top: 70px; }
     :root {
-      --laranja:  #ff6a00;
-      --laranja2: #ff9800;
-      --amarelo:  #ffb000;
-      --bege:     #fff6e6;
-      --marrom:   #2d1b00;
-      --verde:    #1B7F2E;
-      --vermelho: #D62828;
-    }
+  /* Cores Principais */
+  --laranja: #E65A19;         /* Laranja Fogueira: Vibrante, mas confortável para leitura */
+  --laranja2: #C4430C;        /* Laranja Queimado: Perfeito para efeitos de hover e títulos */
+  --marrom: #422616;          /* Marrom Quentão: Substitui o preto. Deixa o texto elegante e rústico */
+  
+  /* Cores de Destaque */
+  --amarelo: #F5B915;         /* Amarelo Girassol: Auto-contraste, ideal para o badge do carrinho */
+  --verde: #237D36;           /* Verde Milharal: Tom de sucesso fechado e muito profissional */
+  --vermelho: #C92A2A;        /* Vermelho Estalinho: Para avisos de erro e exclusão */
+  
+  /* Fundos e Superfícies (O grande truque!) */
+  --fundo-pagina: #FFFDF6;    /* Palha Suave: Um fundo levemente amarelado que traz aconchego */
+  --fundo-card: #FFFFFF;      /* Branco Puro: Usado nos blocos de itens para dar contraste */
+  --borda-suave: #F0E6D2;     /* Borda Rústica: Para separar os elementos sem agredir */
+}
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Poppins', sans-serif; background: var(--bege); color: var(--marrom); overflow-x: hidden; }
+    body { font-family: 'Poppins', sans-serif; background: var(--fundo-pagina); color: var(--marrom); overflow-x: hidden; }
 
     /* ── BANDEIRINHAS ── */
     .bandeirinhas { width: 100%; height: 44px; background: var(--marrom); overflow: hidden; display: flex; align-items: flex-end; padding-bottom: 4px; }
@@ -326,6 +333,21 @@
       .pix-box { padding: 24px 16px; }
       .qrcode { width: 70vw; max-width: 220px; }
     }
+    
+    /* Customizando a barra de rolagem lateral */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #fff4e6; /* Cor de fundo da pista */
+}
+::-webkit-scrollbar-thumb {
+  background: var(--laranja); /* Cor da barra em si */
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--marrom); /* Cor quando passa o mouse */
+}
   </style>
 </head>
 <body>
@@ -347,7 +369,7 @@
   <div class="carrinho-header" onclick="toggleCarrinhoMobile()">
     <h3>🛒 Seu Pedido</h3>
     <!-- Indicador de seta para celular (escondido no PC) -->
-    <span class="seta-mobile">Puxar ▲</span> 
+    <span class="seta-mobile">▲</span> 
   </div>
   
   <div class="carrinho-body" id="carrinho-body">
