@@ -635,7 +635,7 @@
   }
   function closeModal(){ document.getElementById('modalOverlay').classList.remove('ativo'); }
 
-  function finishOrder(){
+function finishOrder(){
     const nome=document.getElementById('cliente-nome').value.trim();
     const tel=document.getElementById('cliente-telefone').value.trim();
     
@@ -671,7 +671,11 @@
     closeModal();
     dispararConfetes();
     mostrarToast('🎉 Código Pix gerado! Copie abaixo.', false);
-    setTimeout(()=>{ window.open(`https://wa.me/5511942285574?text=${encodeURIComponent(msg)}`,'_blank'); }, 1200);
+    
+    // CORREÇÃO AQUI: window.location.href direciona sem ser bloqueado pelo celular
+    setTimeout(()=>{ 
+      window.location.href = `https://wa.me/5511942285574?text=${encodeURIComponent(msg)}`; 
+    }, 1200);
   }
 
   function copyPix(){
@@ -722,14 +726,13 @@
     setTimeout(()=>{w.classList.remove('ativo');w.innerHTML='';},7000);
   }
 
-  function mostrarToast(mensagem, isErro = false) {
+function mostrarToast(mensagem, isErro = false) {
     const t = document.getElementById('toast');
     t.textContent = mensagem; 
     t.style.background = isErro ? 'var(--vermelho)' : 'var(--verde)'; 
     t.classList.remove('ativo');
-    void t.offsetWidth; 
-    t.add('ativo');
-    t.classList.add('ativo');
+    void t.offsetWidth; // Força o navegador a resetar a animação
+    t.classList.add('ativo'); // CORREÇÃO AQUI: Linha duplicada errada removida
   }
 
   const telInput = document.getElementById('cliente-telefone');
