@@ -237,7 +237,7 @@
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-box">
     <h3>Finalizar Pedido 🛒</h3>
-    <input class="modal-input" type="text" id="cliente-nome" placeholder="Seu nome" />
+    <input class="modal-input" type="text" id="cliente-nome" placeholder="Seu nome completo" />
     <input class="modal-input" type="tel" id="cliente-telefone" placeholder="Seu telefone (com DDD)" />
     <button class="btn-modal-ok" onclick="finishOrder()">📲 Enviar Pedido no WhatsApp</button>
     <button class="btn-modal-cancel" onclick="closeModal()">Cancelar</button>
@@ -646,7 +646,7 @@ function finishOrder(){
     const nome=document.getElementById('cliente-nome').value.trim();
     const tel=document.getElementById('cliente-telefone').value.trim();
     
-    if(!nome){ mostrarToast('⚠️ Digite seu nome, por favor!', true); return; }
+    if(!nome){ mostrarToast('⚠️ Digite seu nome completo, por favor!', true); return; }
     if(!tel){ mostrarToast('⚠️ Digite seu telefone, por favor!', true); return; }
     
     const telLimpo=tel.replace(/\D/g,'');
